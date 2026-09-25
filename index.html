@@ -1,46 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Hub</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Hub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { gold: '#ff6b6b', violet: '#7c5cff', teal: '#2dd4bf' },
+        keyframes: {
+          fadeInUp: {
+            '0%': { opacity: 0, transform: 'translateY(14px)' },
+            '100%': { opacity: 1, transform: 'translateY(0)' },
+          },
+          fadeInDown: {
+            '0%': { opacity: 0, transform: 'translateY(-10px)' },
+            '100%': { opacity: 1, transform: 'translateY(0)' },
+          },
+          headingIn: {
+            '0%': { opacity: 0, transform: 'translateY(-24px) scale(0.9)' },
+            '60%': { opacity: 1, transform: 'translateY(4px) scale(1.03)' },
+            '100%': { opacity: 1, transform: 'translateY(0) scale(1)' },
+          },
+          fadeIn: {
+            '0%': { opacity: 0 },
+            '100%': { opacity: 1 },
+          },
+          pulseGlow: {
+            '0%, 100%': { opacity: 0.7, transform: 'translateX(-50%) scale(1)' },
+            '50%': { opacity: 1, transform: 'translateX(-50%) scale(1.12)' },
+          },
+          drift: {
+            '0%, 100%': { backgroundPosition: '0% 0%, 100% 0%, 50% 100%' },
+            '50%': { backgroundPosition: '10% 10%, 90% 10%, 55% 95%' },
+          },
+        },
+        animation: {
+          fadeInUp: 'fadeInUp 0.6s ease forwards',
+          fadeInDown: 'fadeInDown 0.6s ease forwards',
+          headingIn: 'headingIn 0.8s cubic-bezier(.21,1.02,.73,1) forwards',
+          fadeIn: 'fadeIn 0.5s ease forwards',
+          pulseGlow: 'pulseGlow 6s ease-in-out infinite',
+          drift: 'drift 22s ease-in-out infinite',
+        },
+      },
+    },
+  }
+</script>
+<style>
+  body{
+    background-color:#0a0710;
+    background-image:
+      radial-gradient(circle at 12% -8%, rgba(255,107,107,.20), transparent 42%),
+      radial-gradient(circle at 88% 4%, rgba(124,92,255,.22), transparent 48%),
+      radial-gradient(circle at 50% 115%, rgba(45,212,191,.14), transparent 55%),
+      linear-gradient(165deg,#0a0710 0%,#120b1c 45%,#1a1030 100%);
+    background-size:200% 200%,200% 200%,200% 200%,100% 100%;
+    background-attachment:fixed;
+  }
+  .brand-gradient{
+    background-image:linear-gradient(90deg,#ff6b6b 0%,#ffb86b 45%,#7c5cff 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+</style>
 </head>
+<body class="min-h-screen text-gray-100 font-sans animate-drift pb-16">
 
-<body>
-    <nav class="navbar">
-        <div class="nav-inner">
-            <span class="logo">🎬 MovieHub</span>
-            <span class="nav-tagline">Discover films in seconds</span>
-        </div>
-    </nav>
+  <nav class="bg-[#0f0a17]/70 backdrop-blur border-b border-white/10 animate-fadeInDown -mb-1">
+    <div class="max-w-5xl mx-auto flex items-center justify-between px-5 py-4">
+      <span class="font-bold text-lg hover:-rotate-3 hover:scale-105 transition-transform inline-block cursor-default">🎬 MovieHub</span>
+      <span class="text-sm text-gray-400 flex items-center gap-1">🍿 Discover films in seconds</span>
+    </div>
+  </nav>
 
-    <header class="hero">
-        <div class="hero-inner">
-            <h1>Movie Hub</h1>
-            <p class="tagline">Search any movie — posters, ratings, cast &amp; full plot, all in one place.</p>
+  <header class="relative pt-14 pb-10 px-4">
+    <div class="absolute left-1/2 -top-10 w-[380px] h-[380px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,107,107,.18),transparent_60%,rgba(124,92,255,.14)_100%)] animate-pulseGlow pointer-events-none"></div>
+    <div class="relative z-10 max-w-xl mx-auto text-center">
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-3 opacity-0 animate-headingIn tracking-tight">
+        <span class="inline-block animate-bounce">🎬</span>
+        <span class="brand-gradient">Movie Hub</span>
+        <span class="inline-block animate-bounce [animation-delay:0.15s]">🍿</span>
+      </h1>
+      <p class="text-gray-400 max-w-md mx-auto mb-6 opacity-0 animate-fadeInUp [animation-delay:0.05s]">
+        Search any movie — posters, ratings, cast &amp; full plot, all in one place.
+      </p>
 
-            <form id="movieForm" action="">
-                <input id="movieInput" type="text" placeholder="Search movie title (e.g. Inception, The Matrix)...">
-                <button>Search</button>
-            </form>
+      <form id="movieForm" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-6 opacity-0 animate-fadeInUp [animation-delay:0.1s]">
+        <input id="movieInput" type="text" placeholder="Search movie title (e.g. Inception, The Matrix)..."
+          class="flex-1 px-4 py-3 rounded-lg bg-[#171126] border border-[#332a47] text-gray-100 placeholder-gray-500 focus:outline-none focus:border-violet focus:ring-4 focus:ring-violet/20 transition">
+        <button class="px-6 py-3 rounded-lg bg-gradient-to-r from-[#ff6b6b] to-[#7c5cff] text-white font-semibold hover:brightness-110 active:scale-95 transition shadow-[0_0_0_0_rgba(124,92,255,0)] hover:shadow-[0_0_10px_3px_rgba(124,92,255,0.35)] flex items-center justify-center gap-2">
+          🔍 Search
+        </button>
+      </form>
 
-            <ul class="features">
-                <li>⚡ Instant search</li>
-                <li>🎭 Full cast &amp; plot</li>
-                <li>⭐ IMDb ratings</li>
-            </ul>
-        </div>
-    </header>
+      <ul class="flex flex-wrap justify-center gap-5 text-sm text-gray-400">
+        <li class="opacity-0 animate-fadeInUp [animation-delay:0.4s] hover:text-gold hover:-translate-y-0.5 transition">⚡ Instant search</li>
+        <li class="opacity-0 animate-fadeInUp [animation-delay:0.46s] hover:text-violet hover:-translate-y-0.5 transition">🎭 Full cast &amp; plot</li>
+        <li class="opacity-0 animate-fadeInUp [animation-delay:0.52s] hover:text-teal hover:-translate-y-0.5 transition">⭐ IMDb ratings</li>
+        <li class="opacity-0 animate-fadeInUp [animation-delay:0.58s] hover:text-gold hover:-translate-y-0.5 transition">🎟️ Free &amp; fast</li>
+      </ul>
+    </div>
+  </header>
 
-    <main id="movieHub"></main>
+  <main id="movieHub" class="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 px-4"></main>
 
-    <footer>
-        <p>© 2026 Movie Hub. All rights reserved.</p>
-    </footer>
+  <footer class="text-center text-gray-500 text-sm pt-10">
+    <p>© 2026 Movie Hub. All rights reserved.</p>
+  </footer>
 
-    <script src="Movie hub project.js"></script>
+  <script src="Movie hub project.js"></script>
 </body>
-
 </html>

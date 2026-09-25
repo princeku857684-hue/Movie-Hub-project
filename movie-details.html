@@ -1,34 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie details</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Details</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { gold: '#ff6b6b', violet: '#7c5cff', teal: '#2dd4bf' },
+        keyframes: {
+          fadeInDown: {
+            '0%': { opacity: 0, transform: 'translateY(-10px)' },
+            '100%': { opacity: 1, transform: 'translateY(0)' },
+          },
+          headingIn: {
+            '0%': { opacity: 0, transform: 'translateY(-24px) scale(0.9)' },
+            '60%': { opacity: 1, transform: 'translateY(4px) scale(1.03)' },
+            '100%': { opacity: 1, transform: 'translateY(0) scale(1)' },
+          },
+          fadeIn: {
+            '0%': { opacity: 0 },
+            '100%': { opacity: 1 },
+          },
+          drift: {
+            '0%, 100%': { backgroundPosition: '0% 0%, 100% 0%, 50% 100%' },
+            '50%': { backgroundPosition: '10% 10%, 90% 10%, 55% 95%' },
+          },
+        },
+        animation: {
+          fadeInDown: 'fadeInDown 0.6s ease forwards',
+          headingIn: 'headingIn 0.8s cubic-bezier(.21,1.02,.73,1) forwards',
+          fadeIn: 'fadeIn 0.5s ease forwards',
+          drift: 'drift 22s ease-in-out infinite',
+        },
+      },
+    },
+  }
+</script>
+<style>
+  body{
+    background-color:#0a0710;
+    background-image:
+      radial-gradient(circle at 12% -8%, rgba(255,107,107,.20), transparent 42%),
+      radial-gradient(circle at 88% 4%, rgba(124,92,255,.22), transparent 48%),
+      radial-gradient(circle at 50% 115%, rgba(45,212,191,.14), transparent 55%),
+      linear-gradient(165deg,#0a0710 0%,#120b1c 45%,#1a1030 100%);
+    background-size:200% 200%,200% 200%,200% 200%,100% 100%;
+    background-attachment:fixed;
+  }
+  .brand-gradient{
+    background-image:linear-gradient(90deg,#ff6b6b 0%,#ffb86b 45%,#7c5cff 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+</style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="nav-inner">
-            <a href="index.html" class="logo">🎬 MovieHub</a>
-            <a href="index.html" class="back-link">← Back to search</a>
-        </div>
-    </nav>
+<body class="min-h-screen text-gray-100 font-sans animate-drift pb-16">
 
-    <header class="hero hero-small">
-        <div class="hero-inner">
-            <h1>Movie Details</h1>
-        </div>
-    </header>
+  <nav class="bg-[#0f0a17]/70 backdrop-blur border-b border-white/10 animate-fadeInDown">
+    <div class="max-w-5xl mx-auto flex items-center justify-between px-5 py-4">
+      <a href="index.html" class="font-bold text-lg hover:-rotate-3 hover:scale-105 transition-transform inline-block">🎬 MovieHub</a>
+      <a href="index.html" class="text-sm text-gray-400 hover:text-violet transition flex items-center gap-1">← 🍿 Back to search</a>
+    </div>
+  </nav>
 
-    <div id="movie-detail"></div>
+  <header class="pt-8 pb-2 px-4">
+    <div class="max-w-xl mx-auto text-center">
+      <h1 class="text-3xl sm:text-4xl font-extrabold opacity-0 animate-headingIn tracking-tight">
+        <span class="inline-block animate-bounce">🎬</span>
+        <span class="brand-gradient">Movie Details</span>
+        <span class="inline-block animate-bounce [animation-delay:0.15s]">🍿</span>
+      </h1>
+    </div>
+  </header>
 
-    <footer>
-        <p>© 2026 Movie Hub. All rights reserved.</p>
-    </footer>
+  <div id="movie-detail" class="max-w-4xl mx-auto px-4 pt-6 opacity-0 animate-fadeIn"></div>
 
-    <script src="Movie-Detals.js"></script>
+  <footer class="text-center text-gray-500 text-sm pt-10">
+    <p>© 2026 Movie Hub. All rights reserved.</p>
+  </footer>
+
+  <script src="Movie-Detals.js"></script>
 </body>
 </html>
-
-
-`http://www.omdbapi.com/?apikey=3eed3bad&i=${imdbID}&plot=full`);
